@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 2</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <h1>{{userName}} Schema</h1>
+        <form id="user" v-on:submit.prevent="setUserName">
+            <input
+                   v-model="newUserName"
+                   placeholder="namn">
+            <button>Ok</button>
+        </form>
+        <ul id="schedule">
+            <ul  v-bind:id="dayInWeek" v-for ="dayInWeek in days">
+                <h2 class="headerForDay" v-if="dayInWeek == 'time'">Tid</h2>
+                <h2 class="headerForDay" v-else-if="dayInWeek == 'monday'">Måndag</h2>
+                <h2 class="headerForDay" v-else-if="dayInWeek == 'tuesday'">Tisdag</h2>
+                <h2 class="headerForDay" v-else-if="dayInWeek == 'wednesday'">Onsdag</h2>
+                <h2 class="headerForDay" v-else-if="dayInWeek == 'thursday'">Torsdag</h2>
+                <h2 class="headerForDay" v-else-if="dayInWeek == 'friday'">Fredag</h2>
+                <h2 class="headerForDay" v-else>{{dayInWeek}}</h2>
+                <ul v-bind:id="time" class="timeFrame" v-for = "time in times">
+                   <p class="timeFrame" v-if="dayInWeek == 'time'">{{time}}</p>
+                    <li is="booking"
+                        v-for="(booking, index) in bookings"
+                        v-bind:id="booking.id"
+                        v-bind:title="booking.title"
+                        v-bind:time="booking.time"
+                        v-bind:day="booking.day"
+                        v-bind:options="booking.options"
+                        v-bind:prioritized="booking.prioritized"
+                        v-if="booking.day == dayInWeek && booking.time == time"
+                        v-on:delete="bookings.splice(index,1)"
+                    ></li>
+                </ul>
+            </ul>
+        </ul>
+
+        <form id="addBookingForm" v-on:submit.prevent="addBooking">
+            <input class="formItem"
+                    v-model="newTitle"
+                    placeholder="Rubrik">
+            <input class="formItem"
+                    v-model="newTime"
+                    placeholder="Tid">
+            <select class="formItem" v-model="newDay">
+                <option value="monday">Måndag</option>
+                <option value="tuesday">Tisadag</option>
+                <option value="wednesday">Onsdag</option>
+                <option value="thursday">Torsdag</option>
+                <option value="friday">Fredag</option>
+            </select>
+            <button class="formItem">Spara</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

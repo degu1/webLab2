@@ -1,0 +1,192 @@
+
+
+h2{
+    font-size: 20px;
+    padding: 0.5em;
+}
+
+ul{
+    list-style: none;
+}
+body{
+    width: 100%;
+}
+#app{
+    width: 100%;
+    display: grid;
+    grid-template-rows: 75px 50px auto auto;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "heading"
+        "user"
+        "schedule"
+        "newItem";
+}
+
+h1{
+    grid-area: heading;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    padding: 1em;
+}
+#user{
+    grid-area: user;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#schedule{
+    grid-area: schedule;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "monday"
+        "tuesday"
+        "wednesday"
+        "thursday"
+        "friday";
+    border: 1px solid black;
+    width: 100%;
+}
+
+#time{
+    display: none;
+}
+
+
+.timeFrame{
+    width: auto;
+    height: 2em;
+    border: 1px solid black;
+}
+
+#schedule{
+}
+
+#schedule ul:not(#time){
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1%;
+}
+
+#monday{
+    grid-area: monday;
+    background-color: lightskyblue;
+}
+#tuesday{
+    grid-area: tuesday;
+    background-color: lightblue;
+}
+#wednesday{
+    grid-area: wednesday;
+    background-color: lightcoral;
+}
+#thursday{
+    grid-area: thursday;
+    background-color: lightgoldenrodyellow;
+}
+#friday{
+    grid-area: friday;
+    background-color: lightpink;
+}
+
+.headerForDay{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.booking{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.buttonTitle{
+    border: none;
+    background: none;
+}
+
+.buttonTitle:hover{
+    color: #ee3e80;
+}
+
+.option{
+    border: 1px solid black;
+    background-color: #ffbd00;
+    padding: 0.2em;
+}
+
+/***** Form *****/
+#addBookingForm{
+    grid-area: newItem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5% auto 5%;
+    width: auto;
+    max-width: 1000px;
+    padding: 2%;
+    border: 1px solid black;
+}
+.formItem{
+    margin: 1%;
+}
+/* Tablet and desktop*/
+@media screen and (min-width: 768px){
+    #app{
+        display: grid;
+        grid-template-rows: 100px auto auto;
+        grid-template-columns: 75% 25%;
+        grid-template-areas:
+        "heading user"
+        "schedule schedule"
+        "newItem newItem";
+    }
+    h1{
+        font-size: 30px;
+    }
+
+    #schedule{
+        display: grid;
+        grid-template-columns:0.2fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+        "time monday tuesday wednesday thursday friday";
+        border: 1px solid black;
+        padding: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 1000px;
+    }
+    #time{
+        grid-area: time;
+    }
+    #schedule ul:not(#time){
+        margin-bottom: 0;
+    }
+    #schedule ul{
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        list-style: none;
+    }
+
+    .timeInBooking{
+        display: none;
+    }
+
+    #addBookingForm {
+        flex-direction: row;
+    }
+}
